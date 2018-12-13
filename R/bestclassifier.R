@@ -29,6 +29,7 @@
 #' @import ggplot2
 #' @import caret
 #' @import dplyr
+#' @import e1071
 #' @export
 #' @return a confusion matrix of the best binary classification model
 #' @author Shane Ross <saross@@wesleyan.edu>
@@ -38,7 +39,7 @@
 #' names <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "Class")
 #' names(Ionosphere) <- names
 #' bestclassifier(data = Ionosphere, form = Class ~ ., method = "repeatedcv",
-#'                 number = 5, repeats = 2, tuneLength = 5, positive = "Class",
+#'                 number = 5, repeats = 2, tuneLength = 5, positive = "good",
 #'                 model = c("log_reg", "lasso", "rf", "svm", "ann"), set_seed = 1234,
 #'                 subset_train = 1.0, desired_metric = "ROC")
 
