@@ -54,8 +54,7 @@ library(bestclassifier)
 
 bestclassifier(data = CCD, form = default.payment.next.month ~ ., p = 0.7, 
               method = "repeatedcv", number = 5, repeats = 1, tuneLength = 5, 
-              positive ="Default", model = c("log_reg", "lasso", "rf", "svm", "lda", 
-              "knn", "ann", "xgboost"), set_seed = 1234, subset_train = .01, 
+              positive ="Default", model = c("log_reg", "lasso", "rf"), set_seed = 1234, subset_train = .01, 
               desired_metric = "ROC")
 ```
 
