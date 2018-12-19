@@ -24,12 +24,11 @@
 #' @param positive the factor (written as a character string) that corresponds to a "positive" result in your data
 #' @param model the specific binary classification machine learning models to be trained on the data
 #' @param set_seed the seed used for the models
-#' @param subset_train the percentage of the training data used to train the model
+#' @param subset_train optional parameter used to reduce the size of the training dataset in order to speed up binary classification model creation. This parameter is a numeric object between 0 and 1.
 #' @param desired_metric whether the user wants to use AUC or Accuracy to evaluate the models
 #' @import ggplot2
 #' @import caret
 #' @import dplyr
-#' @import e1071
 #' @export
 #' @return a confusion matrix of the best binary classification model
 #' @author Shane Ross <saross@@wesleyan.edu>
@@ -40,7 +39,7 @@
 #' names(Ionosphere) <- names
 #' bestclassifier(data = Ionosphere, form = Class ~ ., method = "repeatedcv",
 #'                 number = 5, repeats = 2, tuneLength = 5, positive = "good",
-#'                 model = c("log_reg", "lasso", "rf", "svm", "ann"), set_seed = 1234,
+#'                 model = c("log_reg", "lasso", "rf"), set_seed = 1234,
 #'                 subset_train = 1.0, desired_metric = "ROC")
 
 
@@ -358,7 +357,8 @@ bestclassifier <- function(data, form, p = .7, method = c("boot", "boot632", "op
     test_data <- data[-index, ]
     
     pred <- predict(logistic_model,  newdata = test_data)
-    return(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    print(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    invisible(logistic_model)
   } else if (best_model == "lasso_reg") {
     
     set.seed(set_seed)
@@ -366,7 +366,8 @@ bestclassifier <- function(data, form, p = .7, method = c("boot", "boot632", "op
     test_data <- data[-index, ]
     
     pred <- predict(lasso_model,  newdata = test_data)
-    return(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    print(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    invisible(lasso_model)
   } else if (best_model == "rf") {
     
     set.seed(set_seed)
@@ -374,7 +375,8 @@ bestclassifier <- function(data, form, p = .7, method = c("boot", "boot632", "op
     test_data <- data[-index, ]
     
     pred <- predict(rf_model,  newdata = test_data)
-    return(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    print(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    invisible(rf_model)
   } else if (best_model == "svm") {
     
     set.seed(set_seed)
@@ -382,7 +384,8 @@ bestclassifier <- function(data, form, p = .7, method = c("boot", "boot632", "op
     test_data <- data[-index, ]
     
     pred <- predict(svm_model,  newdata = test_data)
-    return(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    print(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    invisible(svm_model)
   } else if (best_model == "xgboost") {
     
     set.seed(set_seed)
@@ -390,7 +393,8 @@ bestclassifier <- function(data, form, p = .7, method = c("boot", "boot632", "op
     test_data <- data[-index, ]
     
     pred <- predict(xgb_model,  newdata = test_data)
-    return(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    print(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    invisible(xgb_model)
   } else if (best_model == "ann") {
     
     set.seed(set_seed)
@@ -398,7 +402,8 @@ bestclassifier <- function(data, form, p = .7, method = c("boot", "boot632", "op
     test_data <- data[-index, ]
     
     pred <- predict(ann_model,  newdata = test_data)
-    return(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    print(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    invisible(ann_model)
   } else if (best_model == "lda") {
     
     set.seed(set_seed)
@@ -406,7 +411,8 @@ bestclassifier <- function(data, form, p = .7, method = c("boot", "boot632", "op
     test_data <- data[-index, ]
     
     pred <- predict(lda_model,  newdata = test_data)
-    return(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    print(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    invisible(lda_model)
   } else if (best_model == "knn") {
     
     set.seed(set_seed)
@@ -414,7 +420,8 @@ bestclassifier <- function(data, form, p = .7, method = c("boot", "boot632", "op
     test_data <- data[-index, ]
     
     pred <- predict(knn_model,  newdata = test_data)
-    return(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    print(confusionMatrix(pred, test_data[[form[[2]]]], positive = positive))
+    invisible(knn_model)
   }
   
 }
