@@ -47,7 +47,7 @@ Once identifying the best machine learning model, the bestclassifier function wi
 
 ## Example 
 
-Below is an example of the bestclassifier function used on the CCD dataset:
+Below is an example of the bestclassifier function used on the CCD dataset. Because this dataset is very large, I employed only 1% of the training data in order to train the binary classification models.
 
 ``` r
 library(bestclassifier)
