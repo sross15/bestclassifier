@@ -30,7 +30,7 @@
 #' @import caret
 #' @import dplyr
 #' @export
-#' @return a confusion matrix of the best binary classification model
+#' @return the best binary classification model
 #' @author Shane Ross <saross@@wesleyan.edu>
 #' @examples
 #' data(Ionosphere, package = "mlbench")
