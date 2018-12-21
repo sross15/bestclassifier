@@ -47,16 +47,15 @@ Once identifying the best machine learning model, the bestclassifier function wi
 
 ## Example 
 
-Below is an example of the bestclassifier function used on the CCD dataset:
+Below is an example of the bestclassifier function used on the CCD dataset. Because this dataset contains nearly 30,000 observations, I used only 1% of the training data to build the binary classification models.
 
 ``` r
 library(bestclassifier)
 
 bestclassifier(data = CCD, form = default.payment.next.month ~ ., p = 0.7, 
               method = "repeatedcv", number = 5, repeats = 1, tuneLength = 5, 
-              positive ="Default", model = c("log_reg", "lasso", "rf", "svm", "lda", 
-              "knn", "ann", "xgboost"), set_seed = 1234, subset_train = .01, 
-              desired_metric = "ROC")
+              positive ="Default", model = c("log_reg", "lasso", "rf"), 
+              set_seed = 1234, subset_train = .01, desired_metric = "ROC")
 ```
 
 ## Getting Help

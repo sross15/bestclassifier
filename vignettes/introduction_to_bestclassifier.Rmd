@@ -92,7 +92,7 @@ bestclassifier facilitates this complex, arduous process by allowing you to comp
     + Ex: set_seed = 1234
   
 #### subset_train
-* __subset_train__ depicts the percentage of the training data used to train the binary classification models. This parameter helps reduce computation time when the training dataset is especially large. It accepts numeric objects in between 0 and 1.
+* After the data has been divided into a training and testing dataset, __subset_train__ will reduce the size of the training data in order to generate the binary classification models more quickly. This parameter is used to decrease computation time when the training dataset is especially large and the user does not have time to wait for the results. However, performance can suffer when training a model based on a fraction of the training data. This parameter accepts numeric objects between 0 and 1.
     + Ex: subset_train = .1
 
 #### desired_metric
@@ -114,13 +114,15 @@ str(CCD)
 In the example below, I am seeking the machine learning model that
 produces the highest AUC when classifying credit card default.
 These models will be predicting the "Default" category in the Class 
-variable by using all of the predictors in the dataset.
+variable by using all of the predictors in the dataset. Because the CCD data
+contains nearly 30,000 observations, I am training the model on 1% of the training
+dataset for fast results.
 
 ```{r best.classifier, warning=FALSE, message=FALSE}
 library(bestclassifier)
 bestclassifier(data = CCD, form = default.payment.next.month ~ ., p = 0.7, method = 
 "repeatedcv", number = 5, repeats = 1, tuneLength = 5, 
-positive ="Default", model = c("log_reg", "lasso", "rf", 
+positive ="Default", model = c("log_reg", "lasso", "lda", 
 "svm", "lda", "knn", "ann", 
 "xgboost"),
 set_seed = 1234, subset_train = .01, desired_metric = "ROC")

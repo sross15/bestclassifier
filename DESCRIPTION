@@ -4,7 +4,7 @@ Title: Identify Best Binary Classification Model
 Version: 1.0
 Date: 2018-12-12
 Authors@R: person("Shane", "Ross", role = c("aut", "cre"), email = "saross@wesleyan.edu")
-Description: This package identifies and employs the best binary classification machine learning model on a dataset based on either AUC or Accuracy.
+Description: This package identifies and employs the best binary classification model on a dataset based on either AUC or Accuracy.
 Imports: ggplot2, 
     dplyr,
     caret

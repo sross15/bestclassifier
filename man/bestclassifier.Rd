@@ -33,29 +33,30 @@ bestclassifier(data, form, p = 0.7, method = c("boot", "boot632",
 
 \item{set_seed}{the seed used for the models}
 
-\item{subset_train}{the percentage of the training data used to train the model}
+\item{subset_train}{optional parameter used to reduce the size of the training dataset in order to speed up binary classification model creation. This parameter is a numeric object between 0 and 1.}
 
 \item{desired_metric}{whether the user wants to use AUC or Accuracy to evaluate the models}
 }
 \value{
-a confusion matrix of the best binary classification model
+the best binary classification model
 }
 \description{
 \code{bestclassifier} trains up to eight binary classification models
 on a dataset and identifies the most predictive model according to
-either AUC or accuracy
+either AUC or Accuracy
 }
 \details{
-This function uses the caret package to employ as many as eight binary 
-classification models on a dataset, allowing the user to train
+This function uses the caret package to train as many as eight binary 
+classification models on a dataset, allowing the user to build
 logistic regression, lasso regression, random forest, extreme gradient 
 boosting, support vector machine, artificial neural network, latent 
 dirichlet allocation, and k nearest neighbors models. After training the 
 models, the function prints a bar graph depicting the most predictive
 machine learning model based on AUC or Accuracy and outputs the name of
-the best model on the training dataset as well as its performance results.
-The function then employs the best model on a testing dataset and returns
-a confusion matrix describing the model's predictive results.
+the best model on the training dataset as well as its predictive performance.
+The function then implements the best model on a testing dataset and prints
+a confusion matrix with the model's predictive performance. The function returns
+the best model.
 }
 \examples{
 data(Ionosphere, package = "mlbench")
@@ -63,8 +64,8 @@ Ionosphere <- Ionosphere[-2]
 names <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "aa", "bb", "cc", "dd", "ee", "ff", "gg", "Class")
 names(Ionosphere) <- names
 bestclassifier(data = Ionosphere, form = Class ~ ., method = "repeatedcv",
-                number = 5, repeats = 2, tuneLength = 5, positive = "Class",
-                model = c("log_reg", "lasso", "rf", "svm", "ann"), set_seed = 1234,
+                number = 5, repeats = 2, tuneLength = 5, positive = "good",
+                model = c("log_reg", "lasso", "rf"), set_seed = 1234,
                 subset_train = 1.0, desired_metric = "ROC")
 }
 \author{
