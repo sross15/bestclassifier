@@ -2,18 +2,19 @@
 #' @description
 #' \code{bestclassifier} trains up to eight binary classification models
 #' on a dataset and identifies the most predictive model according to
-#' either AUC or accuracy
+#' either AUC or Accuracy
 #' @details
-#' This function uses the caret package to employ as many as eight binary 
-#' classification models on a dataset, allowing the user to train
+#' This function uses the caret package to train as many as eight binary 
+#' classification models on a dataset, allowing the user to build
 #' logistic regression, lasso regression, random forest, extreme gradient 
 #' boosting, support vector machine, artificial neural network, latent 
 #' dirichlet allocation, and k nearest neighbors models. After training the 
 #' models, the function prints a bar graph depicting the most predictive
 #' machine learning model based on AUC or Accuracy and outputs the name of
-#' the best model on the training dataset as well as its performance results.
-#' The function then employs the best model on a testing dataset and returns
-#' a confusion matrix describing the model's predictive results.
+#' the best model on the training dataset as well as its predictive performance.
+#' The function then implements the best model on a testing dataset and prints
+#' a confusion matrix with the model's predictive performance. The function returns
+#' the best model.
 #' @param data a data frame containing the variables in the model
 #' @param form an object of class formula, relating the binary dependent variable to the independent variables
 #' @param p the proportion of data used on the training dataset
